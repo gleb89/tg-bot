@@ -7,7 +7,25 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
-    await message.answer(f"Salom, {message.from_user.full_name}")
+    my_ads = types.KeyboardButton(f'Мои обьявления 💸')
+    button_add_apartament = types.KeyboardButton('Жилье 💱')
+    button_uslugi = types.KeyboardButton('Услуги💱')
+    button_veschi = types.KeyboardButton('Вещи💱')
+    greet_kb1 = types.ReplyKeyboardMarkup(
+            resize_keyboard=True
+        ).add(
+            button_add_apartament,
+            button_veschi,
+           
+            button_uslugi,
+            my_ads
+            
+            )
+   
+    await message.reply(
+        f'Привет!{message.from_user.first_name}',
+         reply_markup = greet_kb1 
+        )
 
 @dp.message_handler()
 async def start(message: types.Message):
@@ -21,5 +39,13 @@ async def start(message: types.Message):
     """
     print(message.text)
     await message.answer(f"ответил, {message.from_user.full_name}, {message.text}")
+
+
+@dp.callback_query_handler()
+async def callback_inline(call:types.CallbackQuery):
+    """
+    Отслеживает нажатия кнопок
+    """
+    await call.message.answer("Успешно отменено!")
 
 
