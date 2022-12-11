@@ -6,11 +6,13 @@ from bot import dp, bot, TOKEN
 
 
 app = FastAPI()
-WEBHOOK_PATH = f"/bot/{TOKEN}"
-WEBHOOK_URL = "https://ff93-178-35-157-52.ngrok.io" + WEBHOOK_PATH
 # запустить ngrok http 8000
+ngrok_adress = 'https://5bef-85-172-88-198.ngrok.io/'
+WEBHOOK_PATH = f"/bot/{TOKEN}"
+WEBHOOK_URL = ngrok_adress + WEBHOOK_PATH
+
 url = 'https://api.telegram.org/bot <ВАШ_ТОКЕН> /setWebHook?url=https:// <ваш адрес ngrok> .ngrok.io/'
-url = 'https://api.telegram.org/bot5675840357:AAEink0QilMecgu_yS30q5yjLVHzehhbrSg/setWebHook?url=https://ff93-178-35-157-52.ngrok.io/'
+url = f'https://api.telegram.org/bot5675840357:AAEink0QilMecgu_yS30q5yjLVHzehhbrSg/setWebHook?url={ngrok_adress}'
 @app.on_event("startup")
 async def on_startup():
     webhook_info = await bot.get_webhook_info()

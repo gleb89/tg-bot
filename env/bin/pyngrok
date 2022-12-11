@@ -1,4 +1,4 @@
-#!/home/gleb/fastapi-tg/env/bin/python3
+#!/home/gleb/proj/tg-bot/env/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'pyngrok==5.1.0','console_scripts','pyngrok'
 __requires__ = 'pyngrok==5.1.0'
 import re
