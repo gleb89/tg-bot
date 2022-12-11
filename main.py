@@ -1,15 +1,15 @@
 
 
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 from aiogram import types, Dispatcher, Bot
-from bot import dp, bot, TOKEN
+from bot import dp, bot, TOKEN , task_start
 
 
 app = FastAPI()
 # запустить ngrok http 8000
-ngrok_adress = 'https://5bef-85-172-88-198.ngrok.io/'
+ngrok_adress = 'https://5062-85-172-88-198.ngrok.io'
 WEBHOOK_PATH = f"/bot/{TOKEN}"
-WEBHOOK_URL = ngrok_adress + WEBHOOK_PATH
+WEBHOOK_URL = f'{ngrok_adress}' + WEBHOOK_PATH
 
 url = 'https://api.telegram.org/bot <ВАШ_ТОКЕН> /setWebHook?url=https:// <ваш адрес ngrok> .ngrok.io/'
 url = f'https://api.telegram.org/bot5675840357:AAEink0QilMecgu_yS30q5yjLVHzehhbrSg/setWebHook?url={ngrok_adress}'
@@ -28,6 +28,11 @@ async def bot_webhook(update: dict):
     Dispatcher.set_current(dp)
     Bot.set_current(bot)
     await dp.process_update(telegram_update)
+
+@app.get('/')
+def home(background_tasks: BackgroundTasks):
+    background_tasks.add_task(task_start)
+    return 'fdfd'
 
 
 @app.on_event("shutdown")

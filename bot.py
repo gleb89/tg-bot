@@ -1,8 +1,19 @@
 from aiogram import Dispatcher, Bot, types
-
+import asyncio
+import time
 TOKEN = '5675840357:AAEink0QilMecgu_yS30q5yjLVHzehhbrSg'
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
+
+
+async def send():
+    await bot.send_message(text='dsdsdsds',chat_id='321044549')
+
+def task_start():
+   
+    while True:
+        asyncio.run(send())
+        time.sleep(10)
 
 
 @dp.message_handler(commands="start")
@@ -21,11 +32,11 @@ async def start(message: types.Message):
             my_ads
             
             )
-   
+    print(message.chat.id)
     await message.reply(
-        f'Привет!{message.from_user.first_name}',
-         reply_markup = greet_kb1 
+        f'Привет!{message.from_user.first_name} с сегодняшнего дня ты не куришь и получаешь ништяки,если ты не бросишь курить то я буду называть тебя мразь.Время пошло!!!'
         )
+    
 
 @dp.message_handler()
 async def start(message: types.Message):
@@ -47,5 +58,4 @@ async def callback_inline(call:types.CallbackQuery):
     Отслеживает нажатия кнопок
     """
     await call.message.answer("Успешно отменено!")
-
 
